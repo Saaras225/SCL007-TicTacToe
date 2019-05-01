@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert,Button, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Button, Header } from 'react-native';
 import {MaterialCommunityIcons as Icon} from 'react-native-vector-icons';
 
 export default class App extends React.Component {
@@ -82,12 +82,12 @@ export default class App extends React.Component {
     this.setState({currentPlayer: nextPlayer});
 
     //verifica el ganador
-    var winner= this.getWinner
+    var winner= this.getWinner();
     if(winner==1){
       Alert.alert("Gana el Jugador 1");
       this.initializeGame();
     }else if (winner ==-1){
-      Alert.Alert("Gana el jugador 2");
+      Alert.alert("Gana el jugador 2");
       this.initializeGame();
      }
   }
@@ -101,8 +101,8 @@ export default class App extends React.Component {
     var value=this.state.gameState[row][col];
     switch(value)
     {
-      case 1: return <Icon name="close" style={styles.titleX}/>;
-      case -1: return <Icon name="circle-outline" style={styles.titleO}/>;
+      case 1: return <Icon name="close" style={styles.tileX}/>;
+      case -1: return <Icon name="circle-outline" style={styles.tileO}/>;
       default: return <View />;
     }
   }
@@ -111,7 +111,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
+     
         <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
             <TouchableOpacity onPress={()=>this.onTilePress(0,0)} style={[styles.tile, { borderLeftWidth:0, borderTopWidth:0, }]}>
             {this.renderIcon(0,0)}
@@ -131,11 +131,11 @@ export default class App extends React.Component {
             {this.renderIcon(1,0)}
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=>this.onTilePress(1,1)} style={[styles.title,{ }]}>
+            <TouchableOpacity onPress={()=>this.onTilePress(1,1)} style={[styles.tile,{ }]}>
             {this.renderIcon(1,1)}
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=>this.onTilePress(1,2)} style={[styles.title,{borderRightWidth:0, }]}>
+            <TouchableOpacity onPress={()=>this.onTilePress(1,2)} style={[styles.tile,{borderRightWidth:0, }]}>
             {this.renderIcon(1,2)}
             </TouchableOpacity>
           </View>
@@ -154,8 +154,8 @@ export default class App extends React.Component {
           </TouchableOpacity>
           </View>
 
-          <View Style={{paddingTop:50}}/>
-          <Button title="Nuevo Juego" onPress={this.onNewGamePress}/>
+          <View style={styles.reset}/>
+          <Button title="Nuevo Juego" onPress={this.onNewGamePress} color="#9C27B0"/>
       
       </View>
     );
@@ -165,7 +165,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffa0bd',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -179,12 +179,18 @@ const styles = StyleSheet.create({
   },
 
   tileX:{
-    color:"red",
+    color:"#ff1f88",
     fontSize:60,
   },
 
   tileO: {
-    color: "green",
+    color: "#791c3f",
     fontSize:60,
-  }
+  },
+
+  reset:{
+    marginTop: 80,
+    
+  },
+
 });
