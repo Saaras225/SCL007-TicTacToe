@@ -110,7 +110,13 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+
+        <View style={styles.container}>
+
+        <Text style={styles.text}>
+        TIC-TAC-TOE
+        </Text>
+        
      
         <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
             <TouchableOpacity onPress={()=>this.onTilePress(0,0)} style={[styles.tile, { borderLeftWidth:0, borderTopWidth:0, }]}>
@@ -192,5 +198,13 @@ const styles = StyleSheet.create({
     marginTop: 80,
     
   },
+
+  text:{
+    fontSize:40,
+    fontWeight:'bold',
+    color:"#9C27B0",
+    
+    
+  }
 
 });
