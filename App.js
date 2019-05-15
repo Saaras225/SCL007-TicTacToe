@@ -62,6 +62,7 @@ export default class App extends React.Component {
 
     //no hay ganadores
     return 0;
+
   }
 
   onTilePress = (row, col)=> {
@@ -83,19 +84,31 @@ export default class App extends React.Component {
 
     //verifica el ganador
     var winner= this.getWinner();
-    if(winner==1){
+    if (winner==1){
       Alert.alert("Gana el Jugador 1");
       this.initializeGame();
     }else if (winner ==-1){
       Alert.alert("Gana el jugador 2");
       this.initializeGame();
-     }
+    }else if (winner==0){
+      Alert.alert("Empate, intenta nuevamente");
+      this.initializeGame();
+    }
   }
 
   onNewGamePress=()=>{
     this.initializeGame();
   }
 
+   // Indicador del proximo turno
+  turnNext() {
+    if (this.state.currentPlayer === 1) {
+      return 'X'
+    }
+    if (this.state.currentPlayer === -1) {
+      return 'O'
+    }
+  }
 
   renderIcon=(row,col)=>{
     var value=this.state.gameState[row][col];
@@ -115,6 +128,10 @@ export default class App extends React.Component {
 
         <Text style={styles.text}>
         TIC-TAC-TOE
+        </Text>
+
+        <Text style={styles.text1}>
+        Turno jugador: {this.turnNext()}
         </Text>
         
      
@@ -204,7 +221,14 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color:"#9C27B0",
     
-    
-  }
+  },
+
+  text1:{
+    fontSize:20,
+    fontWeight:'bold',
+    color:"#9C27B0",
+    margin:20,
+  },
 
 });
+
